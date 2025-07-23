@@ -12,9 +12,11 @@ import PhotosUI
 
 class PostViewController: UIViewController {
 
-    @IBOutlet weak var containerView: UIView!
-    @IBOutlet weak var previewImageView: UIImageView!
-    @IBOutlet weak var cameraImageView: UIImageView!
+    @IBOutlet weak var containerView      : UIView!
+    @IBOutlet weak var previewImageView   : UIImageView!
+    @IBOutlet weak var cameraImageView    : UIImageView!
+    @IBOutlet weak var descriptionTextView: UITextView!
+    @IBOutlet weak var postButton         : UIButton!
     
     var selectedImage: UIImage? {
         didSet {
@@ -35,12 +37,24 @@ class PostViewController: UIViewController {
         
         previewImageView.contentMode = .scaleAspectFill
         containerView.backgroundColor = UIColor.lightGray
+        containerView.clipsToBounds = true
         
         let containerTap = UITapGestureRecognizer(target: self, action: #selector(showCameraOptions))
         containerView.addGestureRecognizer(containerTap)
         containerView.isUserInteractionEnabled = true
         
-
+        descriptionTextView.layer.borderColor = UIColor.lightGray.cgColor
+        descriptionTextView.layer.borderWidth = 0.5
+        descriptionTextView.textColor = UIColor.lightGray
+        descriptionTextView.text = "What's on your mind?"
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        containerView.layer.cornerRadius = 8
+        descriptionTextView.layer.cornerRadius = 6
+        postButton.layer.cornerRadius = 6
     }
   
     

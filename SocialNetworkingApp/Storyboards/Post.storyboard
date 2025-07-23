@@ -47,7 +47,6 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="sK2-TS-D6L"/>
                                 </constraints>
-                                <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -81,6 +80,8 @@
                     <connections>
                         <outlet property="cameraImageView" destination="2gW-ra-Aq8" id="1dB-Pi-rZ0"/>
                         <outlet property="containerView" destination="0p3-JY-EOX" id="1UI-3t-Qds"/>
+                        <outlet property="descriptionTextView" destination="rOK-Zk-wXm" id="1hO-eF-wjy"/>
+                        <outlet property="postButton" destination="CCM-bd-397" id="CWa-Sc-fGo"/>
                         <outlet property="previewImageView" destination="3Ff-n9-m9s" id="S7e-gf-sLn"/>
                     </connections>
                 </viewController>
