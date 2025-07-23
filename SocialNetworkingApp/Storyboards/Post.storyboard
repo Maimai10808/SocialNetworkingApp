@@ -78,6 +78,11 @@
                             <constraint firstItem="rOK-Zk-wXm" firstAttribute="top" secondItem="0p3-JY-EOX" secondAttribute="bottom" constant="20" id="yTa-mS-Pl9"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="cameraImageView" destination="2gW-ra-Aq8" id="1dB-Pi-rZ0"/>
+                        <outlet property="containerView" destination="0p3-JY-EOX" id="1UI-3t-Qds"/>
+                        <outlet property="previewImageView" destination="3Ff-n9-m9s" id="S7e-gf-sLn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

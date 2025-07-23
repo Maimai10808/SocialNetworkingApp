@@ -9,21 +9,47 @@ import UIKit
 
 class PostViewController: UIViewController {
 
+    @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var previewImageView: UIImageView!
+    @IBOutlet weak var cameraImageView: UIImageView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        previewImageView.contentMode = .scaleAspectFill
+        containerView.backgroundColor = UIColor.lightGray
+        
+        let containerTap = UITapGestureRecognizer(target: self, action: #selector(showCameraOptions))
+        containerView.addGestureRecognizer(containerTap)
+        containerView.isUserInteractionEnabled = true
+        
 
-        // Do any additional setup after loading the view.
+    }
+    
+    @objc func showCameraOptions() {
+        
+        let alert = UIAlertController(title: "Choose Image Source",message: "Attach an image to your post" ,preferredStyle: .actionSheet)
+        
+        let cameraAction  = UIAlertAction(title: "Camera",  style: .default) { _ in
+            
+        }
+        
+        let libraryAction = UIAlertAction(title: "Library", style: .default) { _ in
+            
+        }
+        
+        let cancelAction  = UIAlertAction(title: "cancel",  style: .cancel ) { _ in
+            
+        }
+        
+        alert.addAction(cameraAction)
+        alert.addAction(libraryAction)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true)
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
