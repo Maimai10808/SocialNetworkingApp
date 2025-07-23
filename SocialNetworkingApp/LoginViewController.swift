@@ -9,6 +9,7 @@ import UIKit
 import FirebaseCore
 import FirebaseAuth
 import GoogleSignIn
+import Foundation
 
 class LoginViewController: UIViewController {
 
@@ -93,11 +94,29 @@ class LoginViewController: UIViewController {
                   
                   return
               }
+
+              let tabBarController      = UITabBarController()
               
-              let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-              let homeViewController = mainStoryboard.instantiateViewController(withIdentifier: "HomeViewController")
+              let mainStoryboard        = UIStoryboard(name: "Main", bundle: nil)
+              let homeViewController    = mainStoryboard.instantiateViewController(withIdentifier: "HomeViewController")
+              homeViewController.tabBarItem.image    = UIImage(systemName: "house")
+              homeViewController.tabBarItem.title    = "Home"
+              
+              let postStoryboard        = UIStoryboard(name: "Post", bundle: nil)
+              let postViewController    = postStoryboard.instantiateViewController(withIdentifier: "PostViewController")
+              postViewController.tabBarItem.image    = UIImage(systemName: "paperplane")
+              postViewController.tabBarItem.title    = "Post"
+              
+              let accountStoryboard     = UIStoryboard(name: "Account", bundle: nil)
+              let accountViewController = accountStoryboard.instantiateViewController(withIdentifier: "AccountViewController")
+              accountViewController.tabBarItem.image = UIImage(systemName: "person")
+              accountViewController.tabBarItem.title = "Account"
+              
+              tabBarController.viewControllers = [homeViewController, postViewController, accountViewController]
+              
+              
               let window = UIApplication.keyWindow
-              window?.rootViewController = homeViewController
+              window?.rootViewController = tabBarController
           }
         
     }

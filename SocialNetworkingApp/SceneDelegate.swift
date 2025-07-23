@@ -23,9 +23,29 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         
         if Auth.auth().currentUser != nil {
-            let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let homeViewController = mainStoryboard.instantiateViewController(withIdentifier: "HomeViewController")
-            self.window?.rootViewController = homeViewController
+            
+            let tabBarController      = UITabBarController()
+            
+            let mainStoryboard        = UIStoryboard(name: "Main", bundle: nil)
+            let homeViewController    = mainStoryboard.instantiateViewController(withIdentifier: "HomeViewController")
+            homeViewController.tabBarItem.image    = UIImage(systemName: "house")
+            homeViewController.tabBarItem.title    = "Home"
+            
+            let postStoryboard        = UIStoryboard(name: "Post", bundle: nil)
+            let postViewController    = postStoryboard.instantiateViewController(withIdentifier: "PostViewController")
+            postViewController.tabBarItem.image    = UIImage(systemName: "paperplane")
+            postViewController.tabBarItem.title    = "Post"
+            
+            let accountStoryboard     = UIStoryboard(name: "Account", bundle: nil)
+            let accountViewController = accountStoryboard.instantiateViewController(withIdentifier: "AccountViewController")
+            accountViewController.tabBarItem.image = UIImage(systemName: "person")
+            accountViewController.tabBarItem.title = "Account"
+            
+            tabBarController.viewControllers = [homeViewController, postViewController, accountViewController]
+            
+            
+            self.window?.rootViewController = tabBarController
+            
         } else {
             let authStoryboard = UIStoryboard(name: "Auth", bundle: nil)
             let loginViewController = authStoryboard.instantiateViewController(withIdentifier: "LoginViewController")
@@ -64,4 +84,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
 }
+
+
 
