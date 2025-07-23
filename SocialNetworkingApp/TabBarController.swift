@@ -13,10 +13,14 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        delegate = self
+        
         let mainStoryboard        = UIStoryboard(name: "Main", bundle: nil)
         let homeViewController    = mainStoryboard.instantiateViewController(withIdentifier: "HomeViewController")
-        homeViewController.tabBarItem.image    = UIImage(systemName: "house")
-        homeViewController.tabBarItem.title    = "Home"
+        let homeNavigationController = UINavigationController(rootViewController: homeViewController)
+        homeNavigationController.tabBarItem.image    = UIImage(systemName: "house")
+        homeNavigationController.tabBarItem.title    = "Home"
+        
         
         let postStoryboard        = UIStoryboard(name: "Post", bundle: nil)
         let postViewController    = postStoryboard.instantiateViewController(withIdentifier: "PostViewController")
@@ -25,13 +29,36 @@ class TabBarController: UITabBarController {
         
         let accountStoryboard     = UIStoryboard(name: "Account", bundle: nil)
         let accountViewController = accountStoryboard.instantiateViewController(withIdentifier: "AccountViewController")
-        accountViewController.tabBarItem.image = UIImage(systemName: "person")
-        accountViewController.tabBarItem.title = "Account"
+        let accountNavigationController = UINavigationController(rootViewController: accountViewController)
+        accountNavigationController.tabBarItem.image = UIImage(systemName: "person")
+        accountNavigationController.tabBarItem.title = "Account"
         
-        viewControllers = [homeViewController, postViewController, accountViewController]
+        viewControllers = [homeNavigationController, postViewController, accountNavigationController]
          
     }
     
+    
+}
+
+extension TabBarController: UITabBarControllerDelegate {
+    
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        let selectedViewController = tabBarController.selectedViewController
+        guard selectedViewController != nil else { return false }
+        guard selectedViewController != viewController else { return false }
+        guard let controllerIndex = tabBarController.viewControllers?.firstIndex(of: viewController) else { return false }
+        
+        if controllerIndex == 1 {
+            let postStoryboard        = UIStoryboard(name: "Post", bundle: nil)
+            let postViewController    = postStoryboard.instantiateViewController(withIdentifier: "PostViewController")
+            
+            selectedViewController?.present(postViewController, animated: true)
+            
+            return false
+        }
+        
+        return true
+    }
     
 }
 
