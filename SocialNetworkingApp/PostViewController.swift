@@ -6,6 +6,9 @@
 //
 
 import UIKit
+import Photos
+import PhotosUI
+
 
 class PostViewController: UIViewController {
 
@@ -59,6 +62,12 @@ class PostViewController: UIViewController {
         }
         
         let libraryAction = UIAlertAction(title: "Library", style: .default) { _ in
+            var phPickerCongiguration = PHPickerConfiguration(photoLibrary: .shared())
+            phPickerCongiguration.filter = PHPickerFilter.any(of: [.images])
+            let phPickerViewcontroller = PHPickerViewController(configuration: phPickerCongiguration)
+            phPickerViewcontroller.delegate = self
+            
+            self.present(phPickerViewcontroller, animated: true)
             
         }
         
@@ -93,5 +102,45 @@ extension PostViewController: UIImagePickerControllerDelegate, UINavigationContr
         picker.dismiss(animated: true)
         
     }
+    
+}
+
+extension PostViewController: PHPickerViewControllerDelegate {
+    
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        
+        picker.dismiss(animated: true)
+        
+        if let result = results.first {
+            result.itemProvider.loadObject(ofClass: UIImage.self) { reading, error in
+                
+                if let error = error {
+                    print(error.localizedDescription)
+                    
+                    DispatchQueue.main.async {
+                        self.presentError(title: "Image Error", message: "Could not load image")
+                    }
+                    return
+                }
+                
+                
+                guard let image = reading as? UIImage else {
+                    DispatchQueue.main.async {
+                        self.presentError(title: "Image Error", message: "Could not load image")
+                    }
+                    return
+                }
+                
+                DispatchQueue.main.async {
+                    self.selectedImage = image
+                }
+
+                
+             }
+            
+            
+         }
+        
+     }
     
 }
