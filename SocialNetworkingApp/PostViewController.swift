@@ -13,6 +13,19 @@ class PostViewController: UIViewController {
     @IBOutlet weak var previewImageView: UIImageView!
     @IBOutlet weak var cameraImageView: UIImageView!
     
+    var selectedImage: UIImage? {
+        didSet {
+            if selectedImage != nil {
+                previewImageView.image    = selectedImage
+                cameraImageView .isHidden = true
+            } else {
+                previewImageView.image    = nil
+                cameraImageView .isHidden = false
+            }
+            
+        }
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,12 +39,22 @@ class PostViewController: UIViewController {
         
 
     }
+  
+    
     
     @objc func showCameraOptions() {
         
         let alert = UIAlertController(title: "Choose Image Source",message: "Attach an image to your post" ,preferredStyle: .actionSheet)
         
         let cameraAction  = UIAlertAction(title: "Camera",  style: .default) { _ in
+            
+            if UIImagePickerController.isSourceTypeAvailable(.camera) {
+                let imagePicker = UIImagePickerController()
+                imagePicker.sourceType = .camera
+                imagePicker.allowsEditing = true
+                imagePicker.delegate = self
+                self.present(imagePicker, animated: true)
+            }
             
         }
         
@@ -52,4 +75,23 @@ class PostViewController: UIViewController {
     
 
 
+}
+
+
+extension PostViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        if let image = info[.editedImage] as? UIImage {
+            selectedImage = image
+        }
+        
+        picker.dismiss(animated: true)
+        
+    }
+    
 }
