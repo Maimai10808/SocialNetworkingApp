@@ -8,6 +8,7 @@
 import UIKit
 import FirebaseStorage
 import FirebaseAuth
+import FirebaseFirestore
 
 class UploadImageAndPostViewController: UIViewController {
     
@@ -63,7 +64,23 @@ class UploadImageAndPostViewController: UIViewController {
                     print(error.localizedDescription)
                     return
                 }
-                _ = url?.absoluteString
+                
+                if let downloadURL = url?.absoluteString {
+                    let postData: [String: Any] = [
+                        "imageURL"   : downloadURL,
+                        "description": self.postToUpload.posttext,
+                        "userId"     : userId,
+                        "createdAt"  : Date().timeIntervalSince1970
+                    ]
+                    
+                    Firestore.firestore().collection("posts").document().setData(postData) { error in
+                        if let error {
+                            print(error.localizedDescription)
+                            return
+                        }
+                        self.dismiss(animated: true)
+                    }
+                }
             }
         }
         

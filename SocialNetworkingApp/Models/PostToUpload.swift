@@ -10,7 +10,7 @@ import UIKit
 
 struct PostToUpload {
     let title: String
-    let content: String
+    let posttext: String
     let image: UIImage?
     
 }
