@@ -109,6 +109,20 @@ class PostViewController: UIViewController {
         present(alert, animated: true)
     }
     
+    
+    
+    @IBAction func postButtonTapped(_ sender: Any) {
+        guard let selectedImage = selectedImage else {
+            presentError(title: "Image Required", message: "Please attach an image with your post.")
+            return
+        }
+        guard let postText = descriptionTextView.text, postText.count > 5 && postText.count < 60 else {
+            presentError(title: "Post Text Error", message: "Please ensure the number of characters in your post text is greater than 5 and less than 60.")
+            return
+        }
+        performSegue(withIdentifier: "UploadImageAndPostSegue", sender: nil)
+    }
+    
 
 
 }

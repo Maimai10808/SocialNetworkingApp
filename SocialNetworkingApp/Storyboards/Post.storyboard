@@ -61,6 +61,9 @@
                                 <buttonConfiguration key="configuration" style="plain" title="Post">
                                     <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="postButtonTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="ghG-lI-0dL"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
@@ -83,11 +86,47 @@
                         <outlet property="descriptionTextView" destination="rOK-Zk-wXm" id="1hO-eF-wjy"/>
                         <outlet property="postButton" destination="CCM-bd-397" id="CWa-Sc-fGo"/>
                         <outlet property="previewImageView" destination="3Ff-n9-m9s" id="S7e-gf-sLn"/>
+                        <segue destination="NF0-G1-ecH" kind="presentation" identifier="UploadImageAndPostSegue" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="MQI-le-I4M"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="140" y="131"/>
+        </scene>
+        <!--Upload Image And Post View Controller-->
+        <scene sceneID="aGI-5I-pny">
+            <objects>
+                <viewController id="NF0-G1-ecH" customClass="UploadImageAndPostViewController" customModule="SocialNetworkingApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="spG-Km-zSu">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="78P-r2-uCx">
+                                <rect key="frame" x="30" y="424" width="333" height="4"/>
+                            </progressView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gK2-ZW-ZHv">
+                                <rect key="frame" x="164.66666666666666" y="458" width="64" height="38"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Cancel"/>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="4Vk-XZ-k5v"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.69802167338709675" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="gK2-ZW-ZHv" firstAttribute="top" secondItem="78P-r2-uCx" secondAttribute="bottom" constant="30" id="Y52-Hb-lip"/>
+                            <constraint firstItem="78P-r2-uCx" firstAttribute="leading" secondItem="4Vk-XZ-k5v" secondAttribute="leading" constant="30" id="b6F-BP-z4i"/>
+                            <constraint firstItem="78P-r2-uCx" firstAttribute="centerY" secondItem="spG-Km-zSu" secondAttribute="centerY" id="bfU-ri-WFg"/>
+                            <constraint firstItem="4Vk-XZ-k5v" firstAttribute="trailing" secondItem="78P-r2-uCx" secondAttribute="trailing" constant="30" id="rRj-vN-NiD"/>
+                            <constraint firstItem="gK2-ZW-ZHv" firstAttribute="centerX" secondItem="spG-Km-zSu" secondAttribute="centerX" id="uzo-rb-FRT"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GCj-pO-631" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1140" y="131"/>
         </scene>
     </scenes>
     <resources>
