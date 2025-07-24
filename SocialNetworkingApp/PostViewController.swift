@@ -35,6 +35,20 @@ class PostViewController: UIViewController {
         
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "UploadImageAndPostSegue" {
+            let destinationVC = segue.destination as! UploadImageAndPostViewController
+            // 假设 sender 是传递的数据源，或者你需要从当前视图控制器获取数据
+            // 构造一个 PostToUpload 实例
+            let postToUpload = PostToUpload(
+                title: "示例标题", // 替换为实际标题
+                content: "示例内容", // 替换为实际内容
+                image: UIImage(named: "exampleImage") // 替换为实际图片
+            )
+            destinationVC.postToUpload = postToUpload
+        }
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

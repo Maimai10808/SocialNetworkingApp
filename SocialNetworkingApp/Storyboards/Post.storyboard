@@ -105,11 +105,14 @@
                                 <rect key="frame" x="30" y="424" width="333" height="4"/>
                             </progressView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gK2-ZW-ZHv">
-                                <rect key="frame" x="164.66666666666666" y="458" width="64" height="38"/>
+                                <rect key="frame" x="164" y="458" width="64" height="38"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="Cancel"/>
+                                <connections>
+                                    <action selector="cancelButtonTapped:" destination="NF0-G1-ecH" eventType="touchUpInside" id="EDu-6L-pSr"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="4Vk-XZ-k5v"/>
@@ -123,6 +126,9 @@
                             <constraint firstItem="gK2-ZW-ZHv" firstAttribute="centerX" secondItem="spG-Km-zSu" secondAttribute="centerX" id="uzo-rb-FRT"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="progrssView" destination="78P-r2-uCx" id="iqs-7D-zqi"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GCj-pO-631" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
