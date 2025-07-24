@@ -63,19 +63,25 @@ class UploadImageAndPostViewController: UIViewController {
                     print(error.localizedDescription)
                     return
                 }
-                let downloadURL = url?.absoluteString
+                _ = url?.absoluteString
             }
-            
-            
         }
         
-        
+        uploadTask!.observe(.progress, handler: { snapshot in
+            let percentComplete = Float(snapshot.progress!.completedUnitCount / snapshot.progress!.totalUnitCount)
+            
+            DispatchQueue.main.async {
+                self.progrssView.setProgress(percentComplete, animated: true)
+            }
+           
+        })
         
         
     }
     
     
     @IBAction func cancelButtonTapped(_ sender: Any) {
+        uploadTask?.cancel()
     }
     
 
