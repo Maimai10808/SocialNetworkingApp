@@ -18,7 +18,10 @@ class PostViewController: UIViewController {
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var postButton         : UIButton!
     
+    let placeholderText = "What's on your mind?"
+    
     var selectedImage: UIImage? {
+        
         didSet {
             if selectedImage != nil {
                 previewImageView.image    = selectedImage
@@ -29,6 +32,7 @@ class PostViewController: UIViewController {
             }
             
         }
+        
     }
     
     
@@ -46,7 +50,12 @@ class PostViewController: UIViewController {
         descriptionTextView.layer.borderColor = UIColor.lightGray.cgColor
         descriptionTextView.layer.borderWidth = 0.5
         descriptionTextView.textColor = UIColor.lightGray
-        descriptionTextView.text = "What's on your mind?"
+        descriptionTextView.text = placeholderText
+        descriptionTextView.delegate = self
+        
+        let viewTap = UITapGestureRecognizer(target: self, action: #selector(endTextViewEditing))
+        view.addGestureRecognizer(viewTap)
+        view.isUserInteractionEnabled = true
     }
     
     override func viewDidLayoutSubviews() {
@@ -55,6 +64,10 @@ class PostViewController: UIViewController {
         containerView.layer.cornerRadius = 8
         descriptionTextView.layer.cornerRadius = 6
         postButton.layer.cornerRadius = 6
+    }
+    
+    @objc func endTextViewEditing() {
+        view.endEditing(true)
     }
   
     
@@ -156,5 +169,26 @@ extension PostViewController: PHPickerViewControllerDelegate {
          }
         
      }
+    
+}
+
+
+extension PostViewController: UITextViewDelegate {
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if descriptionTextView.textColor == UIColor.lightGray {
+            descriptionTextView.textColor = UIColor.black
+            descriptionTextView.text = ""
+        }
+    }
+    
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if descriptionTextView.text == "" {
+            descriptionTextView.text = placeholderText
+            descriptionTextView.textColor = UIColor.lightGray
+        }
+    }
+    
     
 }
